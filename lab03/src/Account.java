@@ -5,10 +5,17 @@
 public class Account {
 
     private int balance;
+    private Account parentAccount;
 
     /** Initialize an account with the given balance. */
     public Account(int balance) {
         this.balance = balance;
+        this.parentAccount = null;
+    }
+
+    public Account(int balance, Account parentAccount) {
+        this.balance = balance;
+        this.parentAccount = parentAccount;
     }
 
     /** Returns the balance for the current account. */
@@ -30,15 +37,42 @@ public class Account {
      * would leave a negative balance, print an error message and leave the
      * balance unchanged.
      */
-    public void withdraw(int amount) {
+    public boolean withdraw(int amount) {
         // TODO
+//        if (amount < 0) {
+//            System.out.println("Cannot withdraw negative amount.");
+//            return false;
+//        } else if (balance < amount) {
+//            System.out.println("Insufficient funds");
+//            return false;
+//        } else {
+//            balance -= amount;
+//            return true;
+//        }
         if (amount < 0) {
             System.out.println("Cannot withdraw negative amount.");
-        } else if (balance < amount) {
-            System.out.println("Insufficient funds");
-        } else {
-            balance -= amount;
+            return false;
         }
+        else if (this.balance >= amount) {
+            this.balance -= amount;
+            return true;
+        }
+        else {
+            if (parentAccount != null) {
+                int remaining = amount - balance;
+                if (parentAccount.withdraw(remaining)) {
+                    this.balance = 0;
+                    return true;
+                } else {
+                    System.out.println("Insufficient funds");
+                    return false;
+                }
+            }else{
+                System.out.println("Insufficient funds");
+                return false;
+            }
+        }
+
     }
 
     /**
@@ -47,5 +81,7 @@ public class Account {
      */
     public void merge(Account other) {
         // TODO
+        this.balance += other.balance;
+        other.balance = 0;
     }
 }
