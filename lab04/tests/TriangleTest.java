@@ -1,4 +1,3 @@
-import org.junit.Rule;
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertWithMessage;
 
@@ -13,7 +12,7 @@ public abstract class TriangleTest {
     //  correct Triangle implementation and fail on buggy Triangle implementations.
 
     @Test
-    public void test1() {
+    public void sidesFormTriangle() {
         // TODO: stub for first test
         Triangle t = getNewTriangle();
         // remember that you'll have to call on Triangle methods like
@@ -25,7 +24,7 @@ public abstract class TriangleTest {
     }
 
     @Test
-    public void test2() {
+    public void pointsFormTriangle() {
         // TODO: stub for second test
         Triangle t = getNewTriangle();
         assertWithMessage("They construct a triangle.").that(t.pointsFormTriangle(0,0,3,0,0,4)).isTrue();
@@ -34,7 +33,7 @@ public abstract class TriangleTest {
     }
 
     @Test
-    public void test3() {
+    public void triangleType() {
         // TODO: stub for third test
         Triangle t = getNewTriangle();
         assertWithMessage("They form an Scalene triangle.").that(t.triangleType(2,3,4)).isEqualTo("Scalene");
@@ -43,7 +42,7 @@ public abstract class TriangleTest {
     }
 
     @Test
-    public void test4() {
+    public void squaredHypotenuse() {
         // TODO: stub for fourth test
         Triangle t = getNewTriangle();
         assertWithMessage("The squared hypotenuse is 25.").that(t.squaredHypotenuse(3,4)).isEqualTo(25);
