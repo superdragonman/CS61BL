@@ -34,7 +34,7 @@ public class Bomb {
         String correctPassword = shufflePassword("hello");
         if (!password.equals(correctPassword)) {
             System.out.println("Phase 0 went BOOM!");
-             System.exit(1);
+            System.exit(1);
         } else {
             System.err.println("You passed phase 0 with the password \"" + password + "\"");
         }
@@ -44,7 +44,7 @@ public class Bomb {
         int[] correctArrPassword = shufflePasswordArr("bye");
         if (!Arrays.equals(correctArrPassword, password)) {
             System.out.println("Phase 1 went BOOM!");
-             System.exit(2);
+            System.exit(2);
         } else {
             System.err.print("You passed phase 1 with the password \"");
             System.err.print(Arrays.toString(password));
@@ -72,7 +72,7 @@ public class Bomb {
         }
         if (!correct) {
             System.out.println("Phase 2 went BOOM!");
-             System.exit(3);
+            System.exit(3);
         } else {
             System.err.println("You passed phase 2 with the password \"" + password + "\"");
         }
