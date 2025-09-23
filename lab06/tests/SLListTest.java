@@ -27,5 +27,17 @@ public class SLListTest {
     @Test
     public void testSLListReverse() {
         // TODO: Add tests
+        SLList list = SLList.of(1, 2, 3, 4, 5);
+        list.reverse();
+        assertThat(list).isEqualTo(SLList.of(5, 4, 3, 2, 1));
+
+        SLList list2 = SLList.of(1);
+        list2.reverse();
+        assertThat(list2).isEqualTo(SLList.of(1));
+
+        SLList list3 = new SLList();
+        list3.reverse();
+        assertThat(list3).isEqualTo(new SLList());
+
     }
 }
