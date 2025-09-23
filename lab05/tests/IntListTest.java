@@ -154,10 +154,22 @@ public class IntListTest {
     @Test
     public void testCatenate() {
         // TODO: Add tests
+        IntList A = IntList.of(1, 2, 3);
+        IntList B = IntList.of(4, 5, 6);
+        IntList C = IntList.catenate(A, B);
+        assertWithMessage("C should be (1, 2, 3, 4, 5, 6)").that(C).isEqualTo(IntList.of(1, 2, 3, 4, 5, 6));
+        assertWithMessage("A should be (1, 2, 3)").that(A).isEqualTo(IntList.of(1, 2, 3));
+        assertWithMessage("B should be (4, 5, 6)").that(B).isEqualTo(IntList.of(4, 5, 6));
     }
 
     @Test
     public void testDCatenate() {
         // TODO: Add test
+        IntList A = IntList.of(1, 2, 3);
+        IntList B = IntList.of(4, 5, 6);
+        IntList C = IntList.dcatenate(A, B);
+        assertWithMessage("C should be (1, 2, 3, 4, 5, 6)").that(C).isEqualTo(IntList.of(1, 2, 3, 4, 5, 6));
+        assertWithMessage("A should be (1, 2, 3, 4, 5, 6)").that(A).isEqualTo(IntList.of(1, 2, 3, 4, 5, 6));
+        assertWithMessage("B should be (4, 5, 6)").that(B).isEqualTo(IntList.of(4, 5, 6));
     }
 }

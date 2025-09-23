@@ -48,7 +48,18 @@ public class IntList {
      */
     public int get(int position) {
         // TODO: YOUR CODE HERE
-        return -1;
+        if (position < 0) {
+            throw new IllegalArgumentException("Index out of bounds");
+        }
+        IntList current = this;
+        for (int i = 0; i < position; i++) {
+            if (current.next != null) {
+                current = current.next;
+            } else{
+                throw new IllegalArgumentException("YOUR MESSAGE HERE");
+            }
+        }
+        return current.item;
     }
 
     /**
@@ -59,7 +70,14 @@ public class IntList {
      */
     public String toString() {
         // TODO: YOUR CODE HERE
-        return null;
+        IntList current = this;
+        StringBuilder strNumber = new StringBuilder();
+        strNumber.append(this.item);
+        while (current.next != null) {
+            current = current.next;
+            strNumber.append(" ").append(current.item);
+            }
+        return strNumber.toString();
     }
 
     /**
@@ -82,7 +100,15 @@ public class IntList {
         }
         if (obj instanceof IntList otherList) {
             // TODO: your code here
-
+            IntList currentA = this, currentB = otherList;
+            while (currentA != null && currentB != null) {
+                if (currentA.item != currentB.item) {
+                    return false;
+                }
+                currentA = currentA.next;
+                currentB = currentB.next;
+            }
+            return currentA == null && currentB == null;
         }
         return false;
     }
@@ -94,6 +120,11 @@ public class IntList {
      */
     public void add(int value) {
         // TODO: YOUR CODE HERE
+        IntList current = this;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = new IntList(value);
     }
 
     /**
@@ -103,7 +134,15 @@ public class IntList {
      */
     public int smallest() {
         // TODO: YOUR CODE HERE
-        return -1;
+        IntList current = this;
+        int min = this.item;
+        while (current != null) {
+            if (current.item < min) {
+                min = current.item;
+            }
+            current = current.next;
+        }
+        return min;
     }
 
     /**
@@ -113,7 +152,13 @@ public class IntList {
      */
     public int squaredSum() {
         // TODO: YOUR CODE HERE
-        return -1;
+        IntList current = this;
+        int sum = 0;
+        while (current != null) {
+            sum += current.item * current.item;
+            current = current.next;
+        }
+        return sum;
     }
 
     /**
@@ -171,7 +216,22 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         // TODO: YOUR CODE HERE
-        return null;
+        if (A == null) {
+            return B;
+        } else if (B == null) {
+            return A;
+        } else {
+            IntList newList = new IntList(A.item, null);
+            IntList A_ptr = A.next;
+            IntList newList_ptr = newList;
+            while (A_ptr != null) {
+                newList_ptr.next = new IntList(A_ptr.item, null);
+                A_ptr = A_ptr.next;
+                newList_ptr = newList_ptr.next;
+            }
+            newList_ptr.next = B;
+            return newList;
+        }
     }
 
     /**
@@ -184,6 +244,16 @@ public class IntList {
      */
     public static IntList dcatenate(IntList A, IntList B) {
         // TODO: YOUR CODE HERE
-        return null;
+        if (A == null) {
+            return B;
+        } else if (B == null) {
+            return A;
+        }
+        IntList current = A;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = B;
+        return A;
     }
 }
