@@ -19,37 +19,35 @@ public class GameLogic {
      *              if no merge occurs, then return minR.
      */
     public static int moveTileUpAsFarAsPossible(int[][] board, int r, int c, int minR) {
-        // TODO: Fill this in in tasks 2, 3, 4
-        if (board[r][c] != 0 && r != 0){
+        //  Fill this in in tasks 2, 3, 4
+        if (board[r][c] != 0 && r != 0) {
             int i = r - 1;
-            if (i < minR){
+            if (i < minR) {
                 return minR;
             }
-            while(i >= minR){
-                if (board[i][c] == 0){
+            while (i >= minR) {
+                if (board[i][c] == 0) {
                     i--;
                     continue;
                 }
                 break;
             }
-            if (i < minR){
+            if (i < minR) {
                 board[minR][c] = board[r][c];
                 board[r][c] = 0;
                 return minR;
-            }
-            else if (board[i][c] == board[r][c]){
-                board[i][c] = board[i][c]*2;
+            } else if (board[i][c] == board[r][c]) {
+                board[i][c] = board[i][c] * 2;
                 board[r][c] = 0;
                 return i + 1;
-            }else {
+            } else {
                 board[i + 1][c] = board[r][c];
-                if (i + 1 != r){
+                if (i + 1 != r) {
                     board[r][c] = 0;
                 }
                 return minR;
             }
-        }
-        else{
+        } else {
             return minR;
         }
     }
@@ -62,14 +60,14 @@ public class GameLogic {
      * @param c         the column to tilt up.
      */
     public static void tiltColumn(int[][] board, int c) {
-        // TODO: fill this in in task 5
+        //  fill this in in task 5
         int size = board.length;
         int minR = 0;
         for (int i = 0; i < size; i++) {
-//           moveTileUpAsFarAsPossible(board, i, c, minR);
-//            if (moveTileUpAsFarAsPossible(board, i, c, minR) != minR){
-//                minR = moveTileUpAsFarAsPossible(board, i, c, minR);
-// 不要多次调用moveTileUpAsFarAsPossible，应该只调用一次并存储结果
+            //moveTileUpAsFarAsPossible(board, i, c, minR);
+            //if (moveTileUpAsFarAsPossible(board, i, c, minR) != minR){
+            //minR = moveTileUpAsFarAsPossible(board, i, c, minR);
+            // 不要多次调用moveTileUpAsFarAsPossible，应该只调用一次并存储结果
             minR = moveTileUpAsFarAsPossible(board, i, c, minR);
         }
         return;
@@ -81,7 +79,7 @@ public class GameLogic {
      * @param board     the current state of the board.
      */
     public static void tiltUp(int[][] board) {
-        // TODO: fill this in in task 6
+        //  fill this in in task 6
         int size = board.length;
         for (int i = 0; i < size; i++) {
             tiltColumn(board, i);
@@ -97,7 +95,7 @@ public class GameLogic {
      * @param side  the direction to tilt
      */
     public static void tilt(int[][] board, Side side) {
-        // TODO: fill this in in task 7
+        //  fill this in in task 7
         if (side == Side.NORTH) {
             tiltUp(board);
             return;
