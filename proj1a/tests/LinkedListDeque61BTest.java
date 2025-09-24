@@ -111,6 +111,15 @@ public class LinkedListDeque61BTest {
     }
 
     @Test
+    public void addFirstAfterRemoveToEmptyTest() {
+        Deque61B<Integer> lld = new LinkedListDeque61B<>();
+        lld.addLast(1);
+        lld.removeFirst(); // 现在为空
+        lld.addFirst(2);
+        assertThat(lld.toList()).containsExactly(2).inOrder();
+    }
+
+    @Test
     public void removeLastTest() {
          Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
          assertThat(lld1.removeLast()).isEqualTo(null);
@@ -121,6 +130,21 @@ public class LinkedListDeque61BTest {
          assertThat(lld1.toList()).containsExactly(-1, 1).inOrder();
          assertThat(lld1.removeLast()).isEqualTo(1);
          assertThat(lld1.toList()).containsExactly(-1).inOrder();
+    }
+
+    @Test
+    public void addLastAfterRemoveToEmptyTest() {
+        Deque61B<Integer> lld = new LinkedListDeque61B<>();
+        lld.addFirst(1);
+        lld.removeLast(); // 现在为空
+        lld.addLast(3);
+        assertThat(lld.toList()).containsExactly(3).inOrder();
+    }
+
+    @Test
+    public void toListEmptyTest() {
+        Deque61B<Integer> lld = new LinkedListDeque61B<>();
+        assertThat(lld.toList()).isEmpty();
     }
 
 }
