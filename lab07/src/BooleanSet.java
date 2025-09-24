@@ -57,15 +57,12 @@ public class BooleanSet implements SimpleSet {
     @Override
     public int[] toIntArray() {
         // TODO: Implement this method.
-        int[] arr = new int[0];
-        if (size > 0) {
-            arr = new int[size];
-            int index = 0;
-            for (int i = 0; i < size; i++) {
-                if (contains[index]) {
-                    arr[i] = index;
-                }
-                index++;
+        int[] arr = new int[size];
+        int arrIndex = 0;
+        for (int i =0; i < contains.length; i++) {
+            if (contains[i]) {
+                arr[arrIndex] = i;
+                arrIndex++;
             }
         }
         return arr;
