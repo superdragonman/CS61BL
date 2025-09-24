@@ -13,6 +13,15 @@ public class CodingChallenges {
      */
     public static int missingNumber(int[] values) {
         // TODO
+        Set<Integer> missNumber = new HashSet<>();
+        for (int num : values) {
+            missNumber.add(num);
+        }
+        for (int i = 0; i <= values.length; i++) {
+            if (!missNumber.contains(i)) {
+                return i;
+            }
+        }
         return -1;
     }
 
@@ -22,6 +31,20 @@ public class CodingChallenges {
      */
     public static boolean isPermutation(String s1, String s2) {
         // TODO
-        return false;
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+        Map<Character, Integer> counts = new HashMap<>();
+        for (char c : s1.toCharArray()) {
+            counts.put(c, counts.getOrDefault(c, 0) + 1);
+        }
+        for (char c : s2.toCharArray()) {
+            Integer count = counts.get(c);
+            if (count == null || count == 0) {
+                return false;
+            }
+            counts.put(c, count - 1);
+        }
+        return true;
     }
 }
