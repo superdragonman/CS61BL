@@ -141,4 +141,96 @@ public class ArrayDeque61BTest {
         }
         assertThat(deque3.toList()).containsExactly('0', '1');
     }
+
+    @Test
+    public void removeToEmptyAndToOneTest() {
+        ArrayDeque61B<Integer> deque = new ArrayDeque61B<>();
+        deque.addLast(10);
+        deque.addLast(20);
+        deque.addLast(30); // Deque is [10, 20, 30]
+
+        // Test remove_first_to_one
+        deque.removeFirst(); // Deque is [20, 30]
+        assertThat(deque.removeFirst()).isEqualTo(20); // Deque is [30], size is 1
+        assertThat(deque.toList()).containsExactly(30).inOrder();
+        assertThat(deque.size()).isEqualTo(1);
+
+        // Test remove_first_to_empty
+        assertThat(deque.removeFirst()).isEqualTo(30); // Deque is [], size is 0
+        assertThat(deque.toList()).isEmpty();
+        assertThat(deque.isEmpty()).isTrue();
+
+        // Reset and test for removeLast
+        deque.addLast(10);
+        deque.addLast(20);
+        deque.addLast(30); // Deque is [10, 20, 30]
+
+        // Test remove_last_to_one
+        deque.removeLast(); // Deque is [10, 20]
+        assertThat(deque.removeLast()).isEqualTo(20); // Deque is [10], size is 1
+        assertThat(deque.toList()).containsExactly(10).inOrder();
+        assertThat(deque.size()).isEqualTo(1);
+
+        // Test remove_last_to_empty
+        assertThat(deque.removeLast()).isEqualTo(10); // Deque is [], size is 0
+        assertThat(deque.toList()).isEmpty();
+        assertThat(deque.isEmpty()).isTrue();
+    }
+
+    @Test
+    public void addAfterRemoveToEmptyTest() {
+        // 测试 add_first_after_remove_to_empty
+        ArrayDeque61B<Integer> deque1 = new ArrayDeque61B<>();
+        deque1.addLast(10);
+        deque1.addLast(20);
+        deque1.removeFirst(); // deque is [20]
+        deque1.removeFirst(); // deque is []
+
+        // 现在队列为空，使用 addFirst 添加一个元素
+        deque1.addFirst(5);
+        assertThat(deque1.toList()).containsExactly(5).inOrder();
+        assertThat(deque1.size()).isEqualTo(1);
+        assertThat(deque1.get(0)).isEqualTo(5);
+
+        // 测试 add_last_after_remove_to_empty
+        ArrayDeque61B<String> deque2 = new ArrayDeque61B<>();
+        deque2.addFirst("a");
+        deque2.addFirst("b");
+        deque2.removeLast(); // deque is ["b"]
+        deque2.removeLast(); // deque is []
+
+        // 现在队列为空，使用 addLast 添加一个元素
+        deque2.addLast("c");
+        assertThat(deque2.toList()).containsExactly("c").inOrder();
+        assertThat(deque2.size()).isEqualTo(1);
+        assertThat(deque2.get(0)).isEqualTo("c");
+    }
+
+    @Test
+    public void sizeAfterRemoveTest() {
+        ArrayDeque61B<Integer> deque = new ArrayDeque61B<>();
+
+        // 对应 "size_after_remove_from_empty"
+        // 初始为空，size 应该为 0
+        assertThat(deque.size()).isEqualTo(0);
+        // 从空队列移除，size 应该仍然为 0
+        deque.removeFirst();
+        assertThat(deque.size()).isEqualTo(0);
+        deque.removeLast();
+        assertThat(deque.size()).isEqualTo(0);
+
+        // 对应 "size_after_remove_to_empty"
+        deque.addLast(10);
+        deque.addLast(20);
+        assertThat(deque.size()).isEqualTo(2);
+        deque.removeFirst();
+        assertThat(deque.size()).isEqualTo(1);
+        // 移除最后一个元素，使其变为空
+        deque.removeLast();
+        // size 应该变为 0
+        assertThat(deque.size()).isEqualTo(0);
+    }
+
+
+
 }
