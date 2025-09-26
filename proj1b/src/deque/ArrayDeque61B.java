@@ -1,10 +1,10 @@
 package deque;
 
 import java.util.ArrayList;
-import java.util.Deque;
+
 import java.util.Iterator;
 import java.util.List;
-import java.lang.Math;
+
 
 public class ArrayDeque61B<T> implements Deque61B<T> {
 
@@ -29,7 +29,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         items[nextFirst] = x;
         nextFirst = (nextFirst - 1 + items.length) % items.length;
         size++;
-        }
+    }
 
     @Override
     public void addLast(T x) {
@@ -67,7 +67,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (isEmpty()) {
             return null;
         }
-        if (size < items.length * 0.25){
+        if (size < items.length * 0.25) {
             resizingDown();
         }
         T value = items[(nextFirst + 1) % items.length];
@@ -82,7 +82,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (isEmpty()) {
             return null;
         }
-        if (size < items.length * 0.25){
+        if (size < items.length * 0.25) {
             resizingDown();
         }
         T value = items[(nextLast - 1 + items.length) % items.length];
@@ -166,17 +166,17 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
             return true;
         }
 
-        if (!(obj instanceof Deque61B<?>)){
+        if (!(obj instanceof Deque61B<?>)) {
             return false;
         }
         Deque61B<?> other = (Deque61B<?>) obj;
 
-        if (this.size() != other.size()){
+        if (this.size() != other.size()) {
             return false;
         }
 
         for (int i = 0; i < this.size(); i++) {
-            if (!this.get(i).equals(other.get(i))){
+            if (!this.get(i).equals(other.get(i))) {
                 return false;
             }
         }
